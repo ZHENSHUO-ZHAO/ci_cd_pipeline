@@ -29,14 +29,14 @@ jobs:
 
   development:
     environment: Development
-    needs: [build, test-artifact]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - run: echo "- Auto-deploy the artifact to the development environment with message '${{vars.MSG}}'" >> $GITHUB_STEP_SUMMARY
 
   staging:
     environment: Staging
-    needs: [development]
+    needs: [development, test-artifact]
     runs-on: ubuntu-latest
     steps:
       - run: |
